@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import { useEffect, useState } from 'react';
 import Book from './Book';
+import { getBooks } from './BookApi';
 import { wait } from '@testing-library/user-event/dist/utils';
 
 function Booklist() {
@@ -8,9 +9,8 @@ function Booklist() {
   const [loading, setLoading] = useState(true);
 
   const downloadBooks = async () => {    
-    console.log(loading);
-    const response = await fetch("http://localhost:3001/books");
-    const books = await response.json();
+    //console.log(loading);
+    const books = await getBooks();
     setBooks(books);
   }
 
