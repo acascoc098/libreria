@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
-import Book from './Book';
+import Book from './Components/Book';
 import { wait } from '@testing-library/user-event/dist/utils';
-import Booklist from './Booklist';
-import BookForm from './BookForm';
+import Booklist from './Components/Booklist';
+import BookForm from './Components/BookForm';
 
 function App() {
   const [books, setBooks] = useState([]);
