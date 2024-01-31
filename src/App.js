@@ -7,11 +7,14 @@ import Booklist from './Booklist';
 import BookForm from './BookForm';
 
 function App() {
-
+  const [books, setBooks] = useState([]);
+  const saveBook = (newBook) => {
+    setBooks([...books,newBook]);
+  }
   return (
     <div className='App'>
-      <BookForm/>
-      <Booklist/>
+      <BookForm saveBook={saveBook}/>
+      <Booklist books={books} setBooks={setBooks}/>
     </div>
   );
 }

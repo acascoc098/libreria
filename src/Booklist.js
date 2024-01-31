@@ -4,8 +4,8 @@ import Book from './Book';
 import { getBooks } from './BookApi';
 import { wait } from '@testing-library/user-event/dist/utils';
 
-function Booklist() {
-  const [books, setBooks] = useState([]);
+function Booklist(books,setBooks) {
+  //const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const downloadBooks = async () => {    

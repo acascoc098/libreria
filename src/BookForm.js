@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { postBook } from "./BookApi";
 
-const BookForm = () => {
+const BookForm = (saveBook) => {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [description, setDescription] = useState("");
     const [cover, setCover] = useState("");
     const [error, setError] = useState(false);
+
+    const resetForm = () => {
+        setTitle("");
+        setAuthor("");
+        setDescription("");
+        setCover("");
+    }
 
     const onSubmit = async (event) => {
         event.preventDefaul();
@@ -16,7 +23,8 @@ const BookForm = () => {
         if (response.error) {
             setError(true);
         } else {
-            setError(false)
+            setError(false);
+            saveBook(book);
         }
     }
 
