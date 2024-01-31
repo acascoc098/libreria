@@ -13,6 +13,7 @@ const BookForm = (saveBook) => {
         setAuthor("");
         setDescription("");
         setCover("");
+        setError(false);
     }
 
     const onSubmit = async (event) => {
@@ -24,7 +25,8 @@ const BookForm = (saveBook) => {
             setError(true);
         } else {
             setError(false);
-            saveBook(book);
+            saveBook(response.data);
+            resetForm();
         }
     }
 

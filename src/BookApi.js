@@ -18,3 +18,14 @@ export const postBook= async (book) => {
     };
     return {error: "No se ha podido guradar el libro"}
 }
+
+export const deleteBook = async (book) => {
+    const response = await fetch("http://localhost:3001/books" + book.id, {
+        method: 'DELETE'
+    });
+    if(response.status === 200){
+        return {error: false};
+    }else{
+        return {error: true, data: "No se ha podido borrar el libro"}
+    }
+}
