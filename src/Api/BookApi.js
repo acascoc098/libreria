@@ -16,7 +16,7 @@ export const postBook= async (book) => {
         return {error: false, data: response.json()}
         //return response.json();
     };
-    return {error: "No se ha podido guradar el libro"}
+    return {error: true,data: "No se ha podido guradar el libro"}
 }
 
 export const deleteBook = async (book) => {

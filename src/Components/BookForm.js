@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { postBook } from "../Api/BookApi";
 
-const BookForm = (saveBook) => {
+const BookForm = ({onSaveBook}) => {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [description, setDescription] = useState("");
@@ -25,7 +25,7 @@ const BookForm = (saveBook) => {
             setError(true);
         } else {
             setError(false);
-            saveBook(response.data);
+            onSaveBook(response.data);
             resetForm();
         }
     }
