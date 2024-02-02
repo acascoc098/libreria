@@ -9,7 +9,7 @@ export const postBook= async (book) => {
     const response = await fetch("http://localhost:3001/books",{
         method: 'POST',
         headers: {'Contente-type' : 'application/json'},
-        body: JSON.stingify(book)
+        body: JSON.stringify(book)
     });
     //console.log(response.status);//201 bien, otro mal
     if(response.status === 201){
