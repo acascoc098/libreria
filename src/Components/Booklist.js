@@ -1,8 +1,6 @@
-import logo from './logo.svg';
 import { useEffect, useState } from 'react';
 import Book from './Book';
 import { getBooks } from '../Api/BookApi';
-import { wait } from '@testing-library/user-event/dist/utils';
 
 function Booklist({books,setBooks,onDeleteBook}) {
   //const [books, setBooks] = useState([]);

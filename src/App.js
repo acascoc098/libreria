@@ -19,7 +19,9 @@ function App() {
 
   return (
     <div className='App'>
-      <BookForm onSaveBook={onSaveBook}/>
+      {
+        //<BookForm onSaveBook={onSaveBook}/>
+      }
       <Booklist books={books} setBooks={setBooks} onDeleteBook={onDeleteBooks}/>
     </div>
   );
