@@ -63,7 +63,7 @@ const BookValidationForm = ({onSaveBook}) => {
                 }
                 break;
             case "author":
-                if (value.length > 0 && !isNaN(value)) {
+                if (value.length > 0 && !isNaN(value)) {//El autor no es obligatorio
                     setErrors({
                         ...errors,
                         author: {error: true, message: "El autor no puede ser un número"}
@@ -75,21 +75,21 @@ const BookValidationForm = ({onSaveBook}) => {
                     })
                 }
                 break;
-            case "":
+            case "description":
                 if (value.length === 0) {
                     setErrors({
                         ...errors,
-                        title: {error: true, message: "El título es obligatorio"}
+                        description: {error: true, message: "La descripción es obligatoria"}
                     })
                 } else {
                     setErrors({
                         ...errors,
-                        title: {error: false, message: ""}
+                        description: {error: false, message: ""}
                     })
                 }
                 break;
-            case "":
-                if (value.length === 0) {
+            case "cover":
+                /*if (value.length === 0) {
                     setErrors({
                         ...errors,
                         title: {error: true, message: "El título es obligatorio"}
@@ -99,7 +99,7 @@ const BookValidationForm = ({onSaveBook}) => {
                         ...errors,
                         title: {error: false, message: ""}
                     })
-                }
+                }*/
                 break;
             default:
                 break;
@@ -133,6 +133,11 @@ const BookValidationForm = ({onSaveBook}) => {
         <div className="form-group">
             <span>Descripción:  </span>
             <input type="text" name="description" value={inputValue.description} onChange={handleChange}/>
+            {errors.description.error ? 
+                <div className="error">{errors.description.message}</div>
+            :
+                ""
+            }
         </div>
         <div className="form-group">
             <span>Portada:  </span>
