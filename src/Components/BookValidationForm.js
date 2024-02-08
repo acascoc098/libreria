@@ -4,7 +4,7 @@ import './BookValidationForm.css';
 
 
 const BookValidationForm = ({onSaveBook}) => {
-    const [error, setError] = useState(false);
+    const [error, setError] = useState({error: false, message: ""});
     const [errors,setErrors] = useState({
         title: {error: false, message: ""}, 
         author : {error: false, message: ""}, 
@@ -34,9 +34,9 @@ const BookValidationForm = ({onSaveBook}) => {
         //const book = {title,author,description,cover};
         const response = await postBook(inputValue);
         if (response.error) {
-            setError(true);
+            //setError(true);
         } else {
-            setError(false);
+            setError({error: true, message: "No se ha podido guardar el libro"});
             onSaveBook(response.data);
             resetForm();
         }
@@ -146,9 +146,9 @@ const BookValidationForm = ({onSaveBook}) => {
         <div className="form-group">
             <button type="submit">Alta</button>
         </div>
-        {/*<div className="error">
-            {error ? "no se ha podido gradar el libro" : "Todo bien"}
-</div>*/}
+        <div className="error">
+            {error.error ? error.message : "Todo bien"}
+        </div>
     </form>
 }
 

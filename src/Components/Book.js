@@ -1,10 +1,19 @@
 import { deleteBook } from "../Api/BookApi";
 
-const Book = ({book, onDeleteBook}) => {
+const Book = ({categories,book, onDeleteBook}) => {
     const delBook = async () => {
         const response = await deleteBook(book);
         if (!response.error) {
             onDeleteBook(book)
+        }
+    }
+
+    const getCategory = ()=>{
+        const cat = categories.find((category)=>category.id==book.category);
+        if (cat) {
+          return cat.name;
+        } else {
+          return "No clasificado";
         }
     }
 
@@ -16,6 +25,7 @@ const Book = ({book, onDeleteBook}) => {
         {
             book.author ? <p>{book.author}</p> : <p>Autor desconocido</p>
         }
+        <p>La categoría es: {getCategory()}</p>
         <button onClick={delBook}>Borrar libro</button>
 
     </div>

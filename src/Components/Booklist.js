@@ -6,10 +6,17 @@ function Booklist({books,setBooks,onDeleteBook}) {
   //const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const downloadBooks = async () => {    
-    //console.log(loading);
-    const books = await getBooks();
-    setBooks(books);
+  const [serverError, setServerError] = useState({error: false, message: ""});
+
+  const downloadBooks = async () => {
+    const response = await getBooks();
+    if (!response.error)
+      setBooks(response.data)
+    else {
+      setBooks([]);
+      setServerError(response.data);
+    }
+
   }
 
   useEffect(() => {
