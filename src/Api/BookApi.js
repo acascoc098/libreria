@@ -1,8 +1,12 @@
 
 export const getBooks = async () => {
-    const response = await fetch("http://localhost:3001/books");
-    const books = await response.json();
-    return books;
+    try{
+        const response = await fetch("http://localhost:3001/books");
+        const books = await response.json();
+        return books;
+    }catch(e){
+        return {error: true, data: "No se ha podido cargar la lista de libros"}
+    }
 }
 
 

@@ -3,20 +3,22 @@ import { postBook } from "../Api/BookApi";
 import './BookValidationForm.css';
 
 
-const BookValidationForm = ({onSaveBook}) => {
-    const [error, setError] = useState({error: false, message: ""});
+const BookValidationForm = ({categories,onSaveBook}) => {
+    const [serverError, setServerError] = useState({error: false, message: ""});
     const [errors,setErrors] = useState({
         title: {error: false, message: ""}, 
         author : {error: false, message: ""}, 
         description : {error: false, message: ""},  
         cover : {error: false, message: ""}
+        //category: {error: false, message: ""}
     });
 
     const [inputValue,setInputValues] = useState({
         title: "", 
         author : "", 
         description : "",  
-        cover : ""
+        cover : "",
+        category : 0
     })
 
     const resetForm = () => {
@@ -24,7 +26,8 @@ const BookValidationForm = ({onSaveBook}) => {
             title: "", 
             author : "", 
             description : "",  
-            cover : ""
+            cover : "",
+            category : ""
         })
     }
 
@@ -34,9 +37,8 @@ const BookValidationForm = ({onSaveBook}) => {
         //const book = {title,author,description,cover};
         const response = await postBook(inputValue);
         if (response.error) {
-            //setError(true);
+            setServerError({error: true, message: "No se ha podido guardar el libro"});
         } else {
-            setError({error: true, message: "No se ha podido guardar el libro"});
             onSaveBook(response.data);
             resetForm();
         }
@@ -45,7 +47,7 @@ const BookValidationForm = ({onSaveBook}) => {
     const handleChange = (event) => {
         //event.target.name
         //event.target.value
-        const {name,value} = event.target;
+        let {name,value} = event.target;
 
         //Validación
         switch(name){
@@ -101,6 +103,9 @@ const BookValidationForm = ({onSaveBook}) => {
                     })
                 }*/
                 break;
+            case "category":
+                value = parseInt(value);
+                break;
             default:
                 break;
         }
@@ -109,6 +114,7 @@ const BookValidationForm = ({onSaveBook}) => {
             ...inputValue,
             [name]: value
         });
+        setServerError({error: false, message: ""});
     }
 
     return <form className="form" onSubmit={onSubmit}>
@@ -144,10 +150,18 @@ const BookValidationForm = ({onSaveBook}) => {
             <input type="text" name="cover" value={inputValue.cover} onChange={handleChange}/>
         </div>
         <div className="form-group">
-            <button type="submit">Alta</button>
+            <span>Categoria:  </span>
+            <select type="text" name="category" value={inputValue.category} onChange={handleChange}>
+                {
+                    categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)
+                }
+            </select>
         </div>
         <div className="error">
-            {error.error ? error.message : "Todo bien"}
+            {serverError.error ? serverError.message : ""}
+        </div>
+        <div className="form-group">
+            <button type="submit">Alta</button>
         </div>
     </form>
 }
